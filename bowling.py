@@ -11,7 +11,8 @@ def calculate_score_for(roll_sequence: list) -> int:
 
         is_strike = len(frame) == 1
         if is_strike:
-            score += 10 + evaluate_strike("".join(parsed_roll_sequence[i+1:i+3])[:2])
+            window_frames_for_strike = "".join(parsed_roll_sequence[i+1:i+3])[:2]
+            score += 10 + evaluate_strike(window_frames_for_strike)
         else:
             partial_score_frame = int(frame[0]) + int(frame[1])
             score += partial_score_frame
@@ -42,10 +43,10 @@ def parse_symbols_in(frame):
 ["3/","2/","0-","0-","0-","0-","0-","0-","0-","0-"]  -> 22 CONSECUTIVE SPARES -- DONE
 ["X","0-","0-","0-","0-","0-","0-","0-","0-","0-"]   -> 10 ISOLATED STRIKE --DONE  
 ["X","23","4-","0-","0-","0-","0-","0-","0-","0-"]   -> 24 STRIKE WITH SOME HITS --DONE
-["X","2/","24","0-","0-","0-","0-","0-","0-","0-"]   -> 38 STRIKE + SPARE + NORMAL
-["X","X","54","0-","0-","0-","0-","0-","0-","0-"]    -> 53 CONSECUTIVE STRIKES
-["0-","0-","0-","0-","0-","0-","0-","0-","0-","3/1"] -> 12 SPARE IN THE FINAL SHOT
-["0-","0-","0-","0-","0-","0-","0-","0-","0-","XXX"] -> 30 STRIKE IN THE FINAL SHOT
+["X","2/","24","0-","0-","0-","0-","0-","0-","0-"]   -> 38 STRIKE + SPARE + NORMAL --DONE
+["X","X","54","0-","0-","0-","0-","0-","0-","0-"]    -> 53 CONSECUTIVE STRIKES --DONE
+["0-","0-","0-","0-","0-","0-","0-","0-","0-","3/","1"] -> 11 SPARE IN THE FINAL SHOT
+["0-","0-","0-","0-","0-","0-","0-","0-","0-","X","X","X"] -> 30 STRIKE IN THE FINAL SHOT
 ["X","X","X","X","X","X","X","X","X","X","X","X"]    -> 300 ALL STRIKES
 """
 
@@ -65,6 +66,11 @@ class BowlingShould(unittest.TestCase):
         self.assertEqual(calculate_score_for(["X","23","4-","0-","0-","0-","0-","0-","0-","0-"]), 24)
         self.assertEqual(calculate_score_for(["X","2/","24","0-","0-","0-","0-","0-","0-","0-"]), 38)
         self.assertEqual(calculate_score_for(["X","X","54","0-","0-","0-","0-","0-","0-","0-"]), 53)
+
+    def test_allows_an_extra_shot_with_a_final_spare(self):
+        self.assertEqual(calculate_score_for(["0-","0-","0-","0-","0-","0-","0-","0-","0-","3/","1"]), 11)
+
+
 
 if __name__ == '__main__':
     unittest.main()
