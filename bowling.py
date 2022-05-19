@@ -2,10 +2,10 @@ import unittest
 
 
 def bowling(roll_sequence: list) -> int:
-    roll_sequence = list(map(lambda frame: frame.replace("-", "0"), roll_sequence))
+    parsed_roll_sequence = list(map(lambda frame: frame.replace("-", "0"), roll_sequence))
 
     score = 0
-    for frame in roll_sequence:
+    for frame in parsed_roll_sequence:
         score += int(frame[0]) + int(frame[1])
 
     return score
