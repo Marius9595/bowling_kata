@@ -10,17 +10,21 @@ def calculate_score_for(roll_sequence: list) -> int:
             next_frame = parsed_roll_sequence[i+1]
 
         is_strike = len(frame) == 1
-        if not is_strike:
+        if is_strike:
+            score += 10 + evaluate_strike("".join(parsed_roll_sequence[i+1:i+3])[:2])
+        else:
             partial_score_frame = int(frame[0]) + int(frame[1])
             score += partial_score_frame
 
             is_spare = len(frame) == 2 and partial_score_frame == 10
             if is_spare:
                 score += int(next_frame[0])
-        else:
-            score = 10 + int(next_frame[0]) + int(next_frame[1])
 
     return score
+
+def evaluate_strike(window_frames_for_strike):
+     return sum(map(lambda x: 10 if x == "X" else int(x), window_frames_for_strike))
+
 
 
 def parse_symbols_in(frame):
@@ -59,6 +63,8 @@ class BowlingShould(unittest.TestCase):
     def test_sum_scores_with_strikes(self):
         self.assertEqual(calculate_score_for(["X","0-","0-","0-","0-","0-","0-","0-","0-","0-"]), 10)
         self.assertEqual(calculate_score_for(["X","23","4-","0-","0-","0-","0-","0-","0-","0-"]), 24)
+        self.assertEqual(calculate_score_for(["X","2/","24","0-","0-","0-","0-","0-","0-","0-"]), 38)
+        self.assertEqual(calculate_score_for(["X","X","54","0-","0-","0-","0-","0-","0-","0-"]), 53)
 
 if __name__ == '__main__':
     unittest.main()
