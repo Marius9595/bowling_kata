@@ -13,9 +13,11 @@ def calculate_score_for(roll_sequence: list) -> int:
             is_spare = len(frame) == 2 and int(frame[0]) + int(frame[1]) == 10
             if is_spare:
                 score += int(parsed_roll_sequence[i+1][0])
-
         else:
-            score += 10
+            score = 10 + int(parsed_roll_sequence[i+1][0]) + int(parsed_roll_sequence[i+1][1])
+
+
+
     return score
 
 
