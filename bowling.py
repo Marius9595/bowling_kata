@@ -1,6 +1,5 @@
 import unittest
 
-
 def calculate_score_for(roll_sequence: list) -> int:
     parsed_roll_sequence = list(map(parse_symbols_in, roll_sequence))
 
@@ -12,7 +11,7 @@ def calculate_score_for(roll_sequence: list) -> int:
         is_strike = len(frame) == 1
         if is_strike:
             window_frames_for_strike = "".join(parsed_roll_sequence[i+1:i+3])[:2]
-            score += 10 + evaluate_strike(window_frames_for_strike)
+            score += 10 + evaluate_strike_in(window_frames_for_strike)
         else:
             partial_score_frame = int(frame[0]) + int(frame[1])
             score += partial_score_frame
@@ -20,18 +19,14 @@ def calculate_score_for(roll_sequence: list) -> int:
             is_spare = len(frame) == 2 and partial_score_frame == 10
             if is_spare:
                 score += int(next_frame[0])
-
     return score
 
-def evaluate_strike(window_frames_for_strike):
+def evaluate_strike_in(window_frames_for_strike):
      return sum(map(lambda x: 10 if x == "X" else int(x), window_frames_for_strike))
-
-
 
 def parse_symbols_in(frame):
     return frame if frame == 'X' else frame.replace("-", "0")\
         .replace("/", str(10 - int(frame[0])))
-
 
 
 
