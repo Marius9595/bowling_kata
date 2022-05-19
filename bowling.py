@@ -36,8 +36,8 @@ def parse_symbols_in(frame):
 ["X","23","4-","0-","0-","0-","0-","0-","0-","0-"]   -> 24 STRIKE WITH SOME HITS
 ["X","2/","24","0-","0-","0-","0-","0-","0-","0-"]   -> 38 STRIKE + SPARE + NORMAL
 ["X","X","54","0-","0-","0-","0-","0-","0-","0-"]    -> 53 CONSECUTIVE STRIKES
-["0-","0-","0-","0-","0-","0-","0-","0-","0-","3/1",] -> 12 SPARE IN THE FINAL SHOT
-["0-","0-","0-","0-","0-","0-","0-","0-","0-","XXX",] -> 30 STRIKE IN THE FINAL SHOT
+["0-","0-","0-","0-","0-","0-","0-","0-","0-","3/1"] -> 12 SPARE IN THE FINAL SHOT
+["0-","0-","0-","0-","0-","0-","0-","0-","0-","XXX"] -> 30 STRIKE IN THE FINAL SHOT
 ["X","X","X","X","X","X","X","X","X","X","X","X"]    -> 300 ALL STRIKES
 """
 
@@ -54,6 +54,7 @@ class BowlingShould(unittest.TestCase):
 
     def test_sum_scores_with_strikes(self):
         self.assertEqual(calculate_score_for(["X","0-","0-","0-","0-","0-","0-","0-","0-","0-"]), 10)
+        self.assertEqual(calculate_score_for(["X","23","4-","0-","0-","0-","0-","0-","0-","0-"]), 24)
 
 if __name__ == '__main__':
     unittest.main()
