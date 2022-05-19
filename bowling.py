@@ -11,7 +11,6 @@ def calculate_score_for(roll_sequence: list) -> int:
         is_spare = len(frame) == 2 and int(frame[0]) + int(frame[1]) == 10
         if is_spare:
             score += int(parsed_roll_sequence[i+1][0])
-
     return score
 
 
@@ -23,10 +22,10 @@ def parse_symbols_in(frame):
 
 
 """
-["1-","0-","0-","0-","0-","0-","0-","0-","0-","0-"]  -> 1  EASIEST
-["23","0-","0-","0-","0-","0-","0-","0-","0-","0-"]  -> 5  NORMAL 
-["1-","2-","0-","0-","0-","0-","0-","0-","0-","0-"]  -> 3  SUM ISOLATED FRAMES
-["2/","4-","0-","0-","1-","0-","0-","0-","0-","0-"]  -> 19 SPARE
+["1-","0-","0-","0-","0-","0-","0-","0-","0-","0-"]  -> 1  EASIEST --DONE
+["23","0-","0-","0-","0-","0-","0-","0-","0-","0-"]  -> 5  NORMAL  -- DONE
+["1-","2-","0-","0-","0-","0-","0-","0-","0-","0-"]  -> 3  SUM ISOLATED FRAMES --DONE
+["2/","4-","0-","0-","1-","0-","0-","0-","0-","0-"]  -> 19 SPARE -- DONE
 ["3/","2/","0-","0-","0-","0-","0-","0-","0-","0-"]  -> 22 CONSECUTIVE SPARES 
 ["X","0-","0-","0-","0-","0-","0-","0-","0-","0-"]   -> 10 ISOLATED STRIKE   
 ["X","23","4-","0-","0-","0-","0-","0-","0-","0-"]   -> 24 STRIKE WITH SOME HITS
@@ -46,6 +45,7 @@ class BowlingShould(unittest.TestCase):
 
     def test_sum_scores_with_spares(self):
         self.assertEqual(calculate_score_for(["2/","4-","0-","0-","1-","0-","0-","0-","0-","0-"]), 19)
+        self.assertEqual(calculate_score_for(["3/","2/","0-","0-","0-","0-","0-","0-","0-","0-"]), 22)
 
 if __name__ == '__main__':
     unittest.main()
