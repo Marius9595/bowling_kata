@@ -2,7 +2,8 @@ import unittest
 
 
 def bowling(roll_sequence: list) -> int:
-    return 1
+    roll_sequence = list(map(lambda frame: frame.replace("-", "0"), roll_sequence))
+    return int(roll_sequence[0][0]) + int(roll_sequence[0][1])
 
 
 """
