@@ -11,9 +11,10 @@ def calculate_score_for(roll_sequence: list) -> int:
 
         is_strike = len(frame) == 1
         if not is_strike:
-            score += int(frame[0]) + int(frame[1])
+            partial_score_frame = int(frame[0]) + int(frame[1])
+            score += partial_score_frame
 
-            is_spare = len(frame) == 2 and int(frame[0]) + int(frame[1]) == 10
+            is_spare = len(frame) == 2 and partial_score_frame == 10
             if is_spare:
                 score += int(next_frame[0])
         else:
@@ -35,8 +36,8 @@ def parse_symbols_in(frame):
 ["1-","2-","0-","0-","0-","0-","0-","0-","0-","0-"]  -> 3  SUM ISOLATED FRAMES --DONE
 ["2/","4-","0-","0-","1-","0-","0-","0-","0-","0-"]  -> 19 SPARE -- DONE
 ["3/","2/","0-","0-","0-","0-","0-","0-","0-","0-"]  -> 22 CONSECUTIVE SPARES -- DONE
-["X","0-","0-","0-","0-","0-","0-","0-","0-","0-"]   -> 10 ISOLATED STRIKE   
-["X","23","4-","0-","0-","0-","0-","0-","0-","0-"]   -> 24 STRIKE WITH SOME HITS
+["X","0-","0-","0-","0-","0-","0-","0-","0-","0-"]   -> 10 ISOLATED STRIKE --DONE  
+["X","23","4-","0-","0-","0-","0-","0-","0-","0-"]   -> 24 STRIKE WITH SOME HITS --DONE
 ["X","2/","24","0-","0-","0-","0-","0-","0-","0-"]   -> 38 STRIKE + SPARE + NORMAL
 ["X","X","54","0-","0-","0-","0-","0-","0-","0-"]    -> 53 CONSECUTIVE STRIKES
 ["0-","0-","0-","0-","0-","0-","0-","0-","0-","3/1"] -> 12 SPARE IN THE FINAL SHOT
