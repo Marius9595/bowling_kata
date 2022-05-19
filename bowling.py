@@ -72,6 +72,8 @@ class BowlingShould(unittest.TestCase):
 
     def test_allows_two_bonus_balls_with_a_final_strike(self):
         self.assertEqual(calculate_score_for(["0-","0-","0-","0-","0-","0-","0-","0-","0-","X","X","X"]), 30)
+        self.assertEqual(calculate_score_for(["X","X","X","X","X","X","X","X","X","X","X","X"]), 300)
+
 
 
 if __name__ == '__main__':
