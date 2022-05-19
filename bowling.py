@@ -1,7 +1,8 @@
 import unittest
 
-def bowling():
-    pass
+
+def bowling(roll_sequence: list) -> int:
+    return 1
 
 
 """
@@ -18,9 +19,11 @@ def bowling():
 ["0-","0-","0-","0-","0-","0-","0-","0-","0-","XXX",] -> 30 STRIKE IN THE FINAL SHOT
 ["X","X","X","X","X","X","X","X","X","X","X","X"]    -> 300 ALL STRIKES
 """
+
+
 class BowlingShould(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)  # add assertion here
+    def test_sum_scores_without_spares_or_strikes(self):
+        self.assertEqual(bowling(["1-", "0-", "0-", "0-", "0-", "0-", "0-", "0-", "0-", "0-"]), 1)
 
 
 if __name__ == '__main__':
