@@ -3,7 +3,12 @@ import unittest
 
 def bowling(roll_sequence: list) -> int:
     roll_sequence = list(map(lambda frame: frame.replace("-", "0"), roll_sequence))
-    return int(roll_sequence[0][0]) + int(roll_sequence[0][1])
+
+    score = 0
+    for frame in roll_sequence:
+        score += int(frame[0]) + int(frame[1])
+
+    return score
 
 
 """
@@ -25,7 +30,8 @@ def bowling(roll_sequence: list) -> int:
 class BowlingShould(unittest.TestCase):
     def test_sum_scores_without_spares_or_strikes(self):
         self.assertEqual(bowling(["1-", "0-", "0-", "0-", "0-", "0-", "0-", "0-", "0-", "0-"]), 1)
-        self.assertEqual(bowling(["23","0-","0-","0-","0-","0-","0-","0-","0-","0-"]),5)
+        self.assertEqual(bowling(["23","0-","0-","0-","0-","0-","0-","0-","0-","0-"]), 5)
+        self.assertEqual(bowling(["1-","2-","0-","0-","0-","0-","0-","0-","0-","0-"]), 3)
 
 if __name__ == '__main__':
     unittest.main()
