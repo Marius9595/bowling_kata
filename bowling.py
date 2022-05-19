@@ -6,19 +6,21 @@ def calculate_score_for(roll_sequence: list) -> int:
 
     score = 0
     for i, frame in enumerate(parsed_roll_sequence):
+        is_strike = len(frame) == 1
+        if not is_strike:
+            score += int(frame[0]) + int(frame[1])
 
-        score += int(frame[0]) + int(frame[1])
+            is_spare = len(frame) == 2 and int(frame[0]) + int(frame[1]) == 10
+            if is_spare:
+                score += int(parsed_roll_sequence[i+1][0])
 
-        is_spare = len(frame) == 2 and int(frame[0]) + int(frame[1]) == 10
-        if is_spare:
-            score += int(parsed_roll_sequence[i+1][0])
-
-
+        else:
+            score += 10
     return score
 
 
 def parse_symbols_in(frame):
-    return frame.replace("-", "0")\
+    return frame if frame == 'X' else frame.replace("-", "0")\
         .replace("/", str(10 - int(frame[0])))
 
 
