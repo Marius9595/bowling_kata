@@ -6,17 +6,18 @@ def calculate_score_for(roll_sequence: list) -> int:
 
     score = 0
     for i, frame in enumerate(parsed_roll_sequence):
+        if i < len(parsed_roll_sequence)-1:
+            next_frame = parsed_roll_sequence[i+1]
+
         is_strike = len(frame) == 1
         if not is_strike:
             score += int(frame[0]) + int(frame[1])
 
             is_spare = len(frame) == 2 and int(frame[0]) + int(frame[1]) == 10
             if is_spare:
-                score += int(parsed_roll_sequence[i+1][0])
+                score += int(next_frame[0])
         else:
-            score = 10 + int(parsed_roll_sequence[i+1][0]) + int(parsed_roll_sequence[i+1][1])
-
-
+            score = 10 + int(next_frame[0]) + int(next_frame[1])
 
     return score
 
