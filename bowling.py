@@ -33,5 +33,8 @@ class BowlingShould(unittest.TestCase):
         self.assertEqual(calculate_score_for(["23","0-","0-","0-","0-","0-","0-","0-","0-","0-"]), 5)
         self.assertEqual(calculate_score_for(["1-","2-","0-","0-","0-","0-","0-","0-","0-","0-"]), 3)
 
+    def test_sum_scores_with_spares(self):
+        self.assertEqual(calculate_score_for(["2/","4-","0-","0-","1-","0-","0-","0-","0-","0-"]), 19)
+
 if __name__ == '__main__':
     unittest.main()
