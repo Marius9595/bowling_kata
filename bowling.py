@@ -5,7 +5,7 @@ def calculate_score_for(roll_sequence: list) -> int:
     parsed_roll_sequence = list(map(parse_symbols_in, roll_sequence))
 
     score = 0
-    for i, frame in enumerate(parsed_roll_sequence):
+    for i, frame in enumerate(parsed_roll_sequence[0:10]):
         if i < len(parsed_roll_sequence)-1:
             next_frame = parsed_roll_sequence[i+1]
 
