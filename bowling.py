@@ -2,13 +2,22 @@ import unittest
 
 
 def calculate_score_for(roll_sequence: list) -> int:
-    parsed_roll_sequence = list(map(lambda frame: frame.replace("-", "0"), roll_sequence))
+    parsed_roll_sequence = list(map(parse_symbols_in, roll_sequence))
 
     score = 0
-    for frame in parsed_roll_sequence:
+    for i, frame in enumerate(parsed_roll_sequence):
         score += int(frame[0]) + int(frame[1])
+        if len(frame) == 2 and int(frame[0]) + int(frame[1]) == 10:
+            score += int(parsed_roll_sequence[i+1][0])
 
     return score
+
+
+def parse_symbols_in(frame):
+    return frame.replace("-", "0")\
+        .replace("/", str(10 - int(frame[0])))
+
+
 
 
 """
