@@ -67,9 +67,11 @@ class BowlingShould(unittest.TestCase):
         self.assertEqual(calculate_score_for(["X","2/","24","0-","0-","0-","0-","0-","0-","0-"]), 38)
         self.assertEqual(calculate_score_for(["X","X","54","0-","0-","0-","0-","0-","0-","0-"]), 53)
 
-    def test_allows_an_extra_shot_with_a_final_spare(self):
+    def test_allows_an_bonus_ball_with_a_final_spare(self):
         self.assertEqual(calculate_score_for(["0-","0-","0-","0-","0-","0-","0-","0-","0-","3/","1"]), 11)
 
+    def test_allows_two_bonus_balls_with_a_final_strike(self):
+        self.assertEqual(calculate_score_for(["0-","0-","0-","0-","0-","0-","0-","0-","0-","X","X","X"]), 30)
 
 
 if __name__ == '__main__':
