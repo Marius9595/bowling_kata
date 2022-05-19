@@ -7,7 +7,9 @@ def calculate_score_for(roll_sequence: list) -> int:
     score = 0
     for i, frame in enumerate(parsed_roll_sequence):
         score += int(frame[0]) + int(frame[1])
-        if len(frame) == 2 and int(frame[0]) + int(frame[1]) == 10:
+
+        is_spare = len(frame) == 2 and int(frame[0]) + int(frame[1]) == 10
+        if is_spare:
             score += int(parsed_roll_sequence[i+1][0])
 
     return score
