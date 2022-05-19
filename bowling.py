@@ -24,7 +24,7 @@ def bowling(roll_sequence: list) -> int:
 class BowlingShould(unittest.TestCase):
     def test_sum_scores_without_spares_or_strikes(self):
         self.assertEqual(bowling(["1-", "0-", "0-", "0-", "0-", "0-", "0-", "0-", "0-", "0-"]), 1)
-
+        self.assertEqual(bowling(["23","0-","0-","0-","0-","0-","0-","0-","0-","0-"]),5)
 
 if __name__ == '__main__':
     unittest.main()
